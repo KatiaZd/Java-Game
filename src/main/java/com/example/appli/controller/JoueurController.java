@@ -44,6 +44,19 @@ public class JoueurController {
         return new ModelAndView("redirect:/joueurs");
     }
 
+    @GetMapping("/joueur/{id}/supprimer")
+    public String supprimer(@PathVariable("id") long id, Model model) {
+        Joueur j = joueurService.getJoueur(id);
+        model.addAttribute("joueur", j);
+        return "joueur/configuration";
+    }
+
+    @PostMapping("/joueur/{id}/supprimer")
+    public ModelAndView supprimer(@PathVariable("id") long id) {
+        joueurService.removeJoueur(id);
+        return new ModelAndView("redirect:/joueurs");
+    }
+
 
 
 }
